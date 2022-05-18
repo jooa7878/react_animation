@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useRef } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 
 const Wrapper = styled.div`
   height: 100vh;
   width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const BiggerBox = styled.div`
+  width: 600px;
+  height: 600px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -24,9 +34,21 @@ const boxVars = {
 };
 
 function App() {
+  const biggerBoxRef = useRef<HTMLDivElement>(null);
+
   return (
     <Wrapper>
-      <Box variants={boxVars} whileHover="hover" whileTap="click"></Box>
+      <BiggerBox ref={biggerBoxRef}>
+        <Box
+          drag
+          dragConstraints={biggerBoxRef}
+          dragSnapToOrigin
+          dragElastic={0}
+          variants={boxVars}
+          whileHover="hover"
+          whileTap="click"
+        ></Box>
+      </BiggerBox>
     </Wrapper>
   );
 }
