@@ -8,7 +8,7 @@ import {
 } from "framer-motion";
 
 const Wrapper = styled(motion.div)`
-  height: 100vh;
+  height: 500vh;
   width: 100vw;
   display: flex;
   justify-content: center;
@@ -37,9 +37,12 @@ function App() {
     ]
   );
 
+  const { scrollYProgress } = useViewportScroll();
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 5]);
+
   return (
     <Wrapper style={{ background: gradient }}>
-      <Box style={{ x, rotateZ }} drag="x" dragSnapToOrigin></Box>
+      <Box style={{ x, rotateZ, scale }} drag="x" dragSnapToOrigin></Box>
     </Wrapper>
   );
 }
